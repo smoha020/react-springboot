@@ -1,0 +1,11 @@
+mysql -u newuser -ppassword
+
+SHOW DATABASES;
+
+USE fullstack;
+
+CREATE TABLE student (id int NOT NULL AUTO_INCREMENT, address varchar(255), name varchar(255), PRIMARY KEY (id));
+
+INSERT INTO student (id, address, name) VALUES (1, "texas", "bob");
+
+SELECT * FROM student;
