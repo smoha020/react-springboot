@@ -6,17 +6,26 @@ fs.file-max=65536
 ulimit -n 65536
 ulimit -u 4096
 EOT
+
+
 cp /etc/security/limits.conf /root/sec_limit.conf_backup
 cat <<EOT> /etc/security/limits.conf
 sonarqube   -   nofile   65536
 sonarqube   -   nproc    409
 EOT
+
+
+#INSTALL JAVA 11
 sudo apt-get update -y
 sudo apt-get install openjdk-11-jdk -y
 sudo update-alternatives --config java
 java -version
+
+
+#INSTALL POSTGRES
 sudo apt update
 wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
+
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
 sudo apt install postgresql postgresql-contrib -y
 #sudo -u postgres psql -c "SELECT version();"
@@ -30,6 +39,9 @@ sudo -i -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE sonarqube to sonar
 systemctl restart  postgresql
 #systemctl status -l   postgresql
 netstat -tulpena | grep postgres
+
+
+#INSTALL SONARQUBE
 sudo mkdir -p /sonarqube/
 cd /sonarqube/
 sudo curl -O https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.3.0.34182.zip
@@ -40,6 +52,7 @@ sudo groupadd sonar
 sudo useradd -c "SonarQube - User" -d /opt/sonarqube/ -g sonar sonar
 sudo chown sonar:sonar /opt/sonarqube/ -R
 cp /opt/sonarqube/conf/sonar.properties /root/sonar.properties_backup
+
 cat <<EOT> /opt/sonarqube/conf/sonar.properties
 sonar.jdbc.username=sonar
 sonar.jdbc.password=admin123
@@ -51,6 +64,7 @@ sonar.search.javaOpts=-Xmx512m -Xms512m -XX:+HeapDumpOnOutOfMemoryError
 sonar.log.level=INFO
 sonar.path.logs=logs
 EOT
+
 cat <<EOT> /etc/systemd/system/sonarqube.service
 [Unit]
 Description=SonarQube service
@@ -67,10 +81,14 @@ LimitNPROC=4096
 [Install]
 WantedBy=multi-user.target
 EOT
+
 systemctl daemon-reload
 systemctl enable sonarqube.service
 #systemctl start sonarqube.service
 #systemctl status -l sonarqube.service
+
+
+#INSTALL NGINNX
 apt-get install nginx -y
 rm -rf /etc/nginx/sites-enabled/default
 rm -rf /etc/nginx/sites-available/default
@@ -94,9 +112,12 @@ server{
     }
 }
 EOT
+
 ln -s /etc/nginx/sites-available/sonarqube /etc/nginx/sites-enabled/sonarqube
 systemctl enable nginx.service
 #systemctl restart nginx.service
+
+#FIREWALL AND REBOOT
 sudo ufw allow 80,9000,9001/tcp
 echo "System reboot in 30 sec"
 sleep 30
