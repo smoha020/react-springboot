@@ -44,10 +44,10 @@ netstat -tulpena | grep postgres
 #INSTALL SONARQUBE
 sudo mkdir -p /sonarqube/
 cd /sonarqube/
-sudo curl -O https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.3.0.34182.zip
+sudo curl -O https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.9.10.61524.zip
 sudo apt-get install zip -y
-sudo unzip -o sonarqube-8.3.0.34182.zip -d /opt/
-sudo mv /opt/sonarqube-8.3.0.34182/ /opt/sonarqube
+sudo unzip -o sonarqube-8.9.10.61524.zip -d /opt/
+sudo mv /opt/sonarqube-8.9.10.61524/ /opt/sonarqube
 sudo groupadd sonar
 sudo useradd -c "SonarQube - User" -d /opt/sonarqube/ -g sonar sonar
 sudo chown sonar:sonar /opt/sonarqube/ -R
@@ -117,7 +117,7 @@ ln -s /etc/nginx/sites-available/sonarqube /etc/nginx/sites-enabled/sonarqube
 systemctl enable nginx.service
 #systemctl restart nginx.service
 
-#FIREWALL AND REBOOT
+#FIREWALL AND REBOOT NOT NEEDED!!!!!!!???????
 sudo ufw allow 80,9000,9001/tcp
 echo "System reboot in 30 sec"
 sleep 30
