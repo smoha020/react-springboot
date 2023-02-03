@@ -14,12 +14,22 @@
       <username>admin</username>
       <password>admin123</password>
     </server>
+    <server>
+      <id>maven-central</id>
+      <username>admin</username>
+      <password>admin123</password>
+    </server>
+    <server>
+      <id>maven-group</id>
+      <username>admin</username>
+      <password>admin123</password>
+    </server>
   </servers>
 
   <mirrors>
     <mirror>
-      <id>central</id>
-      <name>central</name>
+      <id>maven-central</id>
+      <name>maven-central</name>
       <url>http://172.31.12.59:8081/repository/maven-group/</url>
       <mirrorOf>*</mirrorOf>
     </mirror>
