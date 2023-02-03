@@ -56,5 +56,10 @@
 		</plugins>
 		<finalName>react-springboot</finalName>
 	</build>
-
+	<repositories>
+	  <repository>
+	    <id>maven-group</id>
+	    <url>http://172.31.12.59:8081/repository/maven-group/</url>
+	  </repository>
+	</repositories>
 </project>
