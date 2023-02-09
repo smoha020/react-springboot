@@ -2,7 +2,7 @@ version: "3.3"
 
 services:
   nginx: 
-    build: ./FullStackAppFrontEnd/
+    build: ./client/
     ports: 
       - "80:80"
     depends_on:
@@ -10,7 +10,7 @@ services:
 
   api:
     image: api
-    build: ./FullStackApp/
+    build: ./app/
     ports:
       - "8080:8080"
     environment:
