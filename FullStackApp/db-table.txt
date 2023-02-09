@@ -1,11 +1,7 @@
 mysql -u newuser -ppassword
 
-SHOW DATABASES;
+use springtestdb;
 
-USE fullstack;
+CREATE TABLE book (id int NOT NULL AUTO_INCREMENT, name varchar(255), author varchar(255), year varchar(255), rating double, PRIMARY KEY (id));
 
-CREATE TABLE student (id int NOT NULL AUTO_INCREMENT, address varchar(255), name varchar(255), PRIMARY KEY (id));
-
-INSERT INTO student (id, address, name) VALUES (1, "texas", "bob");
-
-SELECT * FROM student;
+INSERT INTO book (id, name, author, year, rating) VALUES (1, "book1", "author1", "1990", 4.5);
