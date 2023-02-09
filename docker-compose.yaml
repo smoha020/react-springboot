@@ -1,16 +1,16 @@
 version: "3.3"
 
 services:
-  nginx: 
-    build: ./client/
-    ports: 
-      - "80:80"
-    depends_on:
-      - api
+  # nginx: 
+  #   build: ./client/
+  #   ports: 
+  #     - "80:80"
+  #   depends_on:
+  #     - api
 
   api:
     image: api
-    build: ./app/
+    build: ./api/
     ports:
       - "8080:8080"
     environment:
