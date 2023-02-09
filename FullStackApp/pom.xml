@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.arjuncodes</groupId>
-	<artifactId>studentsystem</artifactId>
+	<artifactId>bookworld</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>studentsystem</name>
+	<name>bookworld</name>
 	<description>Full stack application using Spring Boot and react</description>
 	<properties>
 		<java.version>1.8</java.version>
@@ -54,7 +54,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>react-springboot</finalName>
+		<finalName>bookworld</finalName>
 	</build>
 	<repositories>
 	  <repository>
