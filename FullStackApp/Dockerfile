@@ -1,4 +1,4 @@
 FROM openjdk:8
-ADD target/react-springboot.jar react-springboot.jar
+ADD target/bookworld.jar bookworld.jar
 COPY /src /src
-ENTRYPOINT ["java", "-jar", "react-springboot.jar"]
+ENTRYPOINT ["java", "-jar", "bookworld"]
