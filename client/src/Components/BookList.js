@@ -21,14 +21,14 @@ class BookList extends Component {
           <tbody>
           {books.map(book => (
             //the key should be for <React.Fragment> not for <tr>
-            <React.Fragment key={book._id}>
+            <React.Fragment key={book.id}>
               <tr>
                 <td> {book.name} </td>
                 <td> {book.author} </td>
                 <td> {book.rating} </td>
                 <td> {book.year} </td> 
                 <td> 
-                  <Link to={`/edit/${book._id}`} style={{color:'white', textAlign:'center'}} 
+                  <Link to={`/edit/${book.id}`} style={{color:'white', textAlign:'center'}} 
                   className="form-control bg-primary ">Edit
                   </Link> 
                   <button style={{color:'white'}} onClick={deleteBook.bind(this, book)} 

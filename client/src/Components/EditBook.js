@@ -27,7 +27,7 @@ class EditBook extends Component {
         
         const editBook = {
             //don't forget the _ in _id
-            _id: this.props.match.params._id,
+            id: this.props.match.params._id,
             name: this.state.name,
             author: this.state.author,
             rating: this.state.rating,

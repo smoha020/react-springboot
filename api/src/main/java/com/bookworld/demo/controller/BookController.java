@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class BookController {
 
     @Autowired
@@ -15,7 +16,7 @@ public class BookController {
 
     @GetMapping("/")
     public String hello(){
-        return "welcome my friend";
+        return "welcome my FRIEND";
     }
 
     @GetMapping("/getbooks")
