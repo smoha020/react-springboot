@@ -22,7 +22,7 @@ class BookList extends Component {
           {books.map(book => (
             //the key should be for <React.Fragment> not for <tr>
             <React.Fragment key={book.id}>
-              <tr>
+              <tr style={{backround:'green'}}>
                 <td> {book.name} </td>
                 <td> {book.author} </td>
                 <td> {book.rating} </td>

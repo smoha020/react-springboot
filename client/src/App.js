@@ -39,7 +39,7 @@ class App extends Component {
   //do not use JSON.stringify.
   addBook = function(book) {
     
-    axios.post('localhost:8080/addbook', book)
+    axios.post('http://localhost:8080/addbook', book)
     .then(res => this.setState({books: [...this.state.books, res.data]}))
       .catch(err => console.log(err));
   }
@@ -62,9 +62,9 @@ class App extends Component {
 
   deleteBook = function(delBook) {
     console.log(delBook)
-    axios.delete(`http://localhost:8080/deletebook/${delBook._id}`)
+    axios.delete(`http://localhost:8080/deletebook/${delBook.id}`)
       .then(res => this.setState({books: [...this.state.books.filter(book => (
-        book._id != delBook._id
+        book.id != delBook.id
         ))]
       }))
       .catch(err => console.log(err));
