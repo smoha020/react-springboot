@@ -5,3 +5,13 @@ use springtestdb;
 CREATE TABLE book (id int NOT NULL AUTO_INCREMENT, name varchar(255), author varchar(255), year varchar(255), rating double, PRIMARY KEY (id));
 
 INSERT INTO book (id, name, author, year, rating) VALUES (1, "book1", "author1", "1990", 4.5);
+
+
+
+
+
+
+
+-----------
+test database password for mysql on amazon linux 2 ec2
+asdASD123!@#
