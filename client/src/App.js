@@ -21,14 +21,14 @@ class App extends Component {
   }
   
   componentDidMount() {
-    axios.get('http://localhost:8080')
+    axios.get('http://localhost:8080/api')
       .then(res => {
         console.log(res)
         this.setState({greeting: [...res.data]})
       })
       .catch(err => console.log(err));
 
-    axios.get('http://localhost:8080/getbooks')
+    axios.get('http://localhost:8080/api/getbooks')
       .then(res => {
         console.log(res.data)
         this.setState({books: [...res.data]})})
@@ -39,14 +39,14 @@ class App extends Component {
   //do not use JSON.stringify.
   addBook = function(book) {
     
-    axios.post('http://localhost:8080/addbook', book)
+    axios.post('http://localhost:8080/api/addbook', book)
     .then(res => this.setState({books: [...this.state.books, res.data]}))
       .catch(err => console.log(err));
   }
 
   updateBook = function(edBook) {
     console.log(edBook);
-    axios.put(`http://localhost:8080/updatebook/`, edBook)
+    axios.put(`http://localhost:8080/api/updatebook/`, edBook)
       .then(() => this.setState({books: [...this.state.books.map(book => {
         if(edBook.id === book.id) {
           book.name = edBook.name;
@@ -62,7 +62,7 @@ class App extends Component {
 
   deleteBook = function(delBook) {
     console.log(delBook)
-    axios.delete(`http://localhost:8080/deletebook/${delBook.id}`)
+    axios.delete(`http://localhost:8080/api/deletebook/${delBook.id}`)
       .then(res => this.setState({books: [...this.state.books.filter(book => (
         book.id != delBook.id
         ))]
