@@ -26,7 +26,7 @@ class BookControllerIntTest {
 
     @Test
     public void testHello() throws Exception {
-        this.mock.perform(get("/"))
+        this.mock.perform(get("/api/"))
                 .andExpect(content().string("welcome my FRIEND"));
     }
 }
