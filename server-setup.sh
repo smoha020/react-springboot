@@ -36,7 +36,7 @@ systemctl daemon-reload
 systemctl start tomcat
 systemctl enable tomcat
 git clone https://github.com/smoha020/react-springboot.git
-cd react-springboot/FullStackApp
+cd react-springboot/api
 mvn install
 systemctl stop tomcat
 sleep 60
