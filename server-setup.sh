@@ -1,3 +1,4 @@
+#!/bin/bash
 TOMURL="https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.tar.gz"
 yum install java-1.8.0-openjdk -y
 yum install git maven wget -y
