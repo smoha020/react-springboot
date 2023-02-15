@@ -35,13 +35,14 @@ EOT
 systemctl daemon-reload
 systemctl start tomcat
 systemctl enable tomcat
-git clone https://github.com/smoha020/react-springboot.git
-cd react-springboot/api
-mvn install
+#git clone https://github.com/smoha020/react-springboot.git
+#cd /home/ec2-user/react-springboot
+#mvn install
 systemctl stop tomcat
 sleep 60
 rm -rf /usr/local/tomcat8/webapps/ROOT*
-cp target/react-springboot.war /usr/local/tomcat8/webapps/ROOT.war
+#cp target/bookworld.war /usr/local/tomcat8/webapps/ROOT.war
+cp /home/ec2-user/bookworld.war /usr/local/tomcat8/webapps/ROOT.war
 systemctl start tomcat
 sleep 120
 #cp /vagrant/application.properties /usr/local/tomcat8/webapps/ROOT/WEB-INF/classes/application.properties
