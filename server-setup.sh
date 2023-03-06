@@ -1,7 +1,7 @@
 #!/bin/bash
 
 TOMURL="https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.tar.gz"
-MVNURL="https://dlcdn.apache.org/maven/maven-3/3.9.0/binaries/apache-maven-3.9.0-bin.tar.gz"
+#MVNURL="https://dlcdn.apache.org/maven/maven-3/3.9.0/binaries/apache-maven-3.9.0-bin.tar.gz"
 
 apt update -y && apt install -y openjdk-8-jdk maven git wget -y
 
@@ -19,21 +19,27 @@ rm -rf /etc/systemd/system/tomcat.service
 
 cat <<EOT>> /etc/systemd/system/tomcat.service
 [Unit]
-Description=Tomcat
+Description=Apache Tomcat
 After=network.target
+
 [Service]
+Type=forking
+
 User=tomcat
 Group=tomcat
-WorkingDirectory=/usr/local/tomcat8
-#Environment=JRE_HOME=/usr/lib/jvm/jre
-Environment=JAVA_HOME=/usr/lib/jvm/jre
-Environment=CATALINA_PID=/var/tomcat/%i/run/tomcat.pid
-Environment=CATALINA_HOME=/usr/local/tomcat8
-Environment=CATALINE_BASE=/usr/local/tomcat8
-ExecStart=/usr/local/tomcat8/bin/catalina.sh run
-ExecStop=/usr/local/tomcat8/bin/shutdown.sh
-RestartSec=10
-Restart=always
+
+Environment=JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+Environment=CATALINA_PID=/opt/tomcat/tomcat.pid
+Environment=CATALINA_HOME=/opt/tomcat
+Environment=CATALINA_BASE=/opt/tomcat
+Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
+
+ExecStart=/opt/tomcat/bin/startup.sh
+ExecStop=/opt/tomcat/bin/shutdown.sh
+
+ExecReload=/bin/kill $MAINPID
+RemainAfterExit=yes
+
 [Install]
 WantedBy=multi-user.target
 EOT
