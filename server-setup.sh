@@ -3,7 +3,7 @@
 TOMURL="https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.tar.gz"
 MVNURL="https://dlcdn.apache.org/maven/maven-3/3.9.0/binaries/apache-maven-3.9.0-bin.tar.gz"
 
-apt update -y && apt install -y openjdk-8-jdk git wget -y
+apt update -y && apt install -y openjdk-8-jdk maven git wget -y
 
 
 #INSTALL TOMCAT
