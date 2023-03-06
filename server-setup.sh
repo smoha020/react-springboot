@@ -29,13 +29,13 @@ User=tomcat
 Group=tomcat
 
 Environment=JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
-Environment=CATALINA_PID=/opt/tomcat/tomcat.pid
-Environment=CATALINA_HOME=/opt/tomcat
-Environment=CATALINA_BASE=/opt/tomcat
+Environment=CATALINA_PID=/usr/local/tomcat8/tomcat.pid
+Environment=CATALINA_HOME=/usr/local/tomcat8/
+Environment=CATALINA_BASE=/usr/local/tomcat8/
 Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
 
-ExecStart=/opt/tomcat/bin/startup.sh
-ExecStop=/opt/tomcat/bin/shutdown.sh
+ExecStart=/usr/local/tomcat8/bin/startup.sh
+ExecStop=/usr/local/tomcat8/bin/shutdown.sh
 
 ExecReload=/bin/kill $MAINPID
 RemainAfterExit=yes
