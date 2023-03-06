@@ -3,7 +3,25 @@
 TOMURL="https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.tar.gz"
 MVNURL="https://dlcdn.apache.org/maven/maven-3/3.9.0/binaries/apache-maven-3.9.0-bin.tar.gz"
 
-apt update -y && apt install -y openjdk-8-jdk git wget -y
+yum install java-1.8.0-openjdk -y
+yum install git wget -y
+
+#INSTALL NEWER VERSION MAVEN (AMAZON LINUX MAVEN IS OUTDATED)
+#yum install maven   #THIS WILL GIVE YOU AN OUTDATED VERSION THAT CAN'T BUILD YOUR PROJECT
+
+cd /opt/
+wget $MVNURL -O maven.tar.gz
+MVNTAR=`tar xzvf maven.tar.gz`
+MVNDIR=`echo $MVNTAR | cut -d '/' -f 1`
+ln -s /opt/$MVNDIR /opt/maven
+cat << EOF > /etc/profile.d/maven.sh
+#!/bin/sh
+export M2_HOME=/opt/maven
+export PATH=${M2_HOME}/bin:$PATH
+EOF
+chmod +x /etc/profile.d/maven.sh
+source /etc/profile.d/maven.sh
+
 
 
 #INSTALL TOMCAT
@@ -41,6 +59,7 @@ systemctl daemon-reload
 systemctl start tomcat
 systemctl enable tomcat
 
+
 #CLONE THE REPO
 cd ~
 git clone https://github.com/smoha020/react-springboot.git
@@ -55,6 +74,7 @@ sleep 60
 rm -rf /usr/local/tomcat8/webapps/ROOT*
 cp target/bookworld.war /usr/local/tomcat8/webapps/ROOT.war
 #cp /home/ec2-user/bookworld.war /usr/local/tomcat8/webapps/ROOT.war
+
 systemctl start tomcat
 sleep 120
 #cp /vagrant/application.properties /usr/local/tomcat8/webapps/ROOT/WEB-INF/classes/application.properties
