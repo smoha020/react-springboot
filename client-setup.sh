@@ -6,6 +6,8 @@ cp -R /home/ubuntu/build/* /usr/share/nginx/html
 
 
 rm -rf /etc/nginx/conf.d/*.conf
+rm -rf /etc/nginx/sites-enabled
+rm -rf /etc/nginx/sites-available
 
 #CREATE CONF FILE
 
