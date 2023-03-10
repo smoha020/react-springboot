@@ -2,7 +2,7 @@
 
 apt update -y && apt install -y nginx 
 
-cp -R react-springboot/client/build/* /usr/share/nginx/html
+cp -R /home/ubuntu/build/* /usr/share/nginx/html
 
 
 rm -rf /etc/nginx/conf.d/*.conf
