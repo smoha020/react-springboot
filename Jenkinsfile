@@ -99,5 +99,23 @@ pipeline {
                 )
             }
         }
-    }
+
+        stage('Deploy Using Ansible Playbooks'){
+            ansiblePlaybook(
+                inventory: 'ansible/stage.inventory',
+                playbook: 'ansible/tomcat-setup.yml',
+                disableHostKeyChecking: true,
+                credentialsId: 'applogin',
+                extraVars: [
+                    USER: 'admin',
+                    PASS: 'admin123',
+                    nexusip: '123.2.2.2',
+                    reponame: 'vprofile-release',
+                    groupid: 'QA',
+                    time: "${env.BUILD_TIMESTAMP}",
+                    build: "${env.BUILD_ID}",
+                    artifact: 'vproapp',
+                    vprofile_version: "vprofile-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.war"
+                ])
+        }
 }
