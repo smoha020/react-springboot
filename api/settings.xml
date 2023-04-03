@@ -5,32 +5,32 @@
 
   <servers>
     <server>
-      <id>maven-snapshots</id>
-      <username>admin</username>
-      <password>admin123</password>
+      <id>${SNAPSHOT_REPO}</id>
+      <username>${NEXUS_USERNAME}</username>
+      <password>${NEXUS_PASSWORD}</password>
     </server>
     <server>
-      <id>maven-releases</id>
-      <username>admin</username>
-      <password>admin123</password>
+      <id>${RELEASE_REPO}</id>
+      <username>${NEXUS_USERNAME}</username>
+      <password>${NEXUS_PASSWORD}</password>
     </server>
     <server>
-      <id>maven-central</id>
-      <username>admin</username>
-      <password>admin123</password>
+      <id>${CENTRAL_REPO}</id>
+      <username>${NEXUS_USERNAME}</username>
+      <password>${NEXUS_PASSWORD}</password>
     </server>
     <server>
-      <id>maven-group</id>
-      <username>admin</username>
-      <password>admin123</password>
+      <id>${GROUP_REPO}</id>
+      <username>${NEXUS_USERNAME}</username>
+      <password>${NEXUS_PASSWORD}</password>
     </server>
   </servers>
 
   <mirrors>
     <mirror>
-      <id>maven-central</id>
-      <name>maven-central</name>
-      <url>http://172.31.12.59:8081/repository/maven-group/</url>
+      <id>${CENTRAL_REPO}</id>
+      <name>${CENTRAL_REPO}</name>
+      <url>http://${NEXUS_IP}:${NEXUS_PORT}/repository/${GROUP_REPO}/</url>
       <mirrorOf>*</mirrorOf>
     </mirror>
   </mirrors>

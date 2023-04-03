@@ -59,10 +59,10 @@
 		</plugins>
 		<finalName>bookworld</finalName>
 	</build>
-<!--	<repositories>-->
-<!--	  <repository>-->
-<!--	    <id>maven-group</id>-->
-<!--	    <url>http://172.31.12.59:8081/repository/maven-group/</url>-->
-<!--	  </repository>-->
-<!--	</repositories>-->
+	<repositories>
+	  <repository>
+	    <id>${GROUP_REPO}</id>
+	    <url>http://${NEXUS_IP}:${NEXUS_PORT}/repository/${GROUP_REPO}/</url>
+	  </repository>
+	</repositories>
 </project>
