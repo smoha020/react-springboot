@@ -2,7 +2,7 @@
   hosts: bookworld
   become: yes
   vars:
-    timestamp: "{{ansible_date_time.date}}_{{ansible_date_time.hour}}_{{ansible_date_time.minute}}"
+    timestamp: "{{ansible_date_time.date}}_{{ansible_date_time.time}}"
   tasks:
     - name: Download latest VProfile.war from nexus
       get_url:
