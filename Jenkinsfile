@@ -115,7 +115,7 @@ pipeline {
                     time: "${env.BUILD_TIMESTAMP}",
                     build: "${env.BUILD_ID}",
                     artifact: 'vproapp',
-                    vprofile_version: "vprofile-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.war"
+                    bookworld_version: "bookworld-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.war"
                 ])
         }
 }
