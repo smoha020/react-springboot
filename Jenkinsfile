@@ -6,15 +6,16 @@ pipeline {
     }
     
     environment {
-        SNAP_REPO = 'vprofile-snapshot'
-		NEXUS_USER = 'admin'
-		NEXUS_PASS = 'admin123'
-		RELEASE_REPO = 'vprofile-release'
-		CENTRAL_REPO = 'vpro-maven-central'
-		NEXUSIP = '172.31.5.4'
-		NEXUSPORT = '8081'
-		NEXUS_GRP_REPO = 'vpro-maven-group'
-        NEXUS_LOGIN = 'nexuslogin'
+        SNAPSHOT_REPO = 'bookworld-snapshot'
+        RELEASE_REPO = 'bookworld-release'
+        CENTRAL_REPO = 'bookworld-maven-central'
+        GROUP_REPO = 'bookworld-group'
+        NEXUS_USERNAME = 'admin'
+        NEXUS_PASSWORD = 'adminadmin'
+        NEXUS_IP = '??'
+        NEXUS_PORT = '8081'
+        NEXUS_LOGIN = 'nexus' 
+        APP_LOGIN = 'bookworldlogin'
         SONARSERVER = 'sonarserver'
         SONARSCANNER = 'sonarscanner'
     }
@@ -45,12 +46,14 @@ pipeline {
 //             }
 //         }
 
+
+
         stage('Sonar Analysis') {
-	    steps {
-		withSonarQubeEnv(credentialsId: 'f225455e-ea59-40fa-8af7-08176e86507a', installationName: 'My SonarQube Server') { 
-		    // You can override the credential to be used 
-		    sh 'mvn sonar:sonar'
-		}
+            steps {
+            withSonarQubeEnv('My SonarQube Server') { 
+                // You can override the credential to be used 
+                sh 'mvn sonar:sonar'
+            }
 	    }
 //             environment {
 //                 scannerHome = tool "${SONARSCANNER}"
@@ -102,8 +105,8 @@ pipeline {
 
         stage('Deploy Using Ansible Playbooks'){
             ansiblePlaybook(
-                inventory: 'ansible/stage.inventory',
-                playbook: 'ansible/tomcat-setup.yml',
+                inventory: 'ansible/inventory',
+                playbook: 'ansible/import.yml',
                 disableHostKeyChecking: true,
                 credentialsId: 'applogin',
                 extraVars: [
