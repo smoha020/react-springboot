@@ -15,7 +15,7 @@ pipeline {
         NEXUS_IP = '??'
         NEXUS_PORT = '8081'
         NEXUS_LOGIN = 'nexus' 
-        APP_LOGIN = 'bookworldlogin'
+        ANSIBLE_LOGIN = 'ansible-login'
         SONARSERVER = 'sonarserver'
         SONARSCANNER = 'sonarscanner'
     }
@@ -108,7 +108,7 @@ pipeline {
                 inventory: 'ansible/inventory',
                 playbook: 'ansible/import.yml',
                 disableHostKeyChecking: true,
-                credentialsId: 'applogin',
+		credentialsId: "${ANSIBLE_LOGIN},
                 extraVars: [
                     USER: 'admin',
                     PASS: 'admin123',
