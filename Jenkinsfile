@@ -12,7 +12,7 @@ pipeline {
         GROUP_REPO = 'bookworld-group'
         NEXUS_USERNAME = 'admin'
         NEXUS_PASSWORD = 'adminadmin'
-        NEXUS_IP = '??'
+        NEXUS_IP = 'privateip???'
         NEXUS_PORT = '8081'
         NEXUS_LOGIN = 'nexus' 
         ANSIBLE_LOGIN = 'ansible-login'
@@ -110,14 +110,14 @@ pipeline {
                 disableHostKeyChecking: true,
 		credentialsId: "${ANSIBLE_LOGIN},
                 extraVars: [
-                    USER: 'admin',
-                    PASS: 'admin123',
-                    nexusip: '123.2.2.2',
-                    reponame: 'vprofile-release',
-                    groupid: 'QA',
-                    time: "${env.BUILD_TIMESTAMP}",
-                    build: "${env.BUILD_ID}",
-                    artifact: 'vproapp',
+	    	    nexususername: "${NEXUS_USERNAME}",
+		    nexuspassword: "${NEXUS_PASSWORD}",
+		    nexusip: "${NEXUS_IP},
+		    releaserepo: "${RELEASE_REPO}",
+                    groupid: 'bookworld',
+                    buildtime: "${env.BUILD_TIMESTAMP}",
+                    buildid: "${env.BUILD_ID}",
+                    artifact: 'bookworld',
                     bookworld_version: "bookworld-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.war"
                 ])
         }
