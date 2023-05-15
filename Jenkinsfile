@@ -12,7 +12,7 @@ pipeline {
         GROUP_REPO = 'bookworld-group'
         NEXUS_USERNAME = 'admin'
         NEXUS_PASSWORD = 'adminadmin'
-        NEXUS_IP = 'privateip???'
+        NEXUS_IP = 'use private ip here???'
         NEXUS_PORT = '8081'
         NEXUS_LOGIN = 'nexus' 
         ANSIBLE_LOGIN = 'ansible-login'
@@ -27,7 +27,7 @@ pipeline {
             }
             post {
                 success {
-                    echo "Now Archiving."
+                    echo "Archiving the artifact"
                     archiveArtifacts artifacts: '**/*.war'
                 }
             }
@@ -50,10 +50,10 @@ pipeline {
 
         stage('Sonar Analysis') {
             steps {
-            withSonarQubeEnv('My SonarQube Server') { 
-                // You can override the credential to be used 
-                sh 'mvn sonar:sonar'
-            }
+            	withSonarQubeEnv('My SonarQube Server') { 
+			// You can override the credential to be used 
+			sh 'mvn sonar:sonar'
+            	}
 	    }
 //             environment {
 //                 scannerHome = tool "${SONARSCANNER}"
@@ -83,20 +83,20 @@ pipeline {
             }
         }
 
-        stage("UploadArtifact"){
+        stage("Upload War To Nexus"){
             steps{
                 nexusArtifactUploader(
                   nexusVersion: 'nexus3',
                   protocol: 'http',
-                  nexusUrl: "${NEXUSIP}:${NEXUSPORT}",
-                  groupId: 'QA',
+                  nexusUrl: "${NEXUS_IP}:${NEXUS_PORT}",
+                  groupId: 'bookworld',
                   version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
                   repository: "${RELEASE_REPO}",
                   credentialsId: "${NEXUS_LOGIN}",
                   artifacts: [
-                    [artifactId: 'vproapp',
+                    [artifactId: 'bookworld',
                      classifier: '',
-                     file: 'target/vprofile-v2.war',
+                     file: 'target/bookworld.war',
                      type: 'war']
                   ]
                 )
@@ -119,6 +119,7 @@ pipeline {
                     buildid: "${env.BUILD_ID}",
                     artifact: 'bookworld',
                     bookworld_version: "bookworld-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.war"
-                ])
+                ]
+	    )
         }
 }
