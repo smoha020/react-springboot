@@ -1,0 +1,20 @@
+name: Crete Workflow by createing yaml file in default branch
+on:
+  push:
+    branches: [cicd-test]
+  # workflow_dispatch:
+
+jobs:
+  Build_Publish:
+    name: CI/CD Pipeline for testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      # Cypress CI/CD Configs
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: sudo apt update -y
