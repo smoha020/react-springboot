@@ -19,7 +19,7 @@ pipeline {
         SONARSERVER = 'sonarserver'
         SONARSCANNER = 'sonarscanner'
     }
- 
+
     stages {
 	stage('WEBHOOK TEST'){
             steps {
