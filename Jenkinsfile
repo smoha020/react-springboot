@@ -23,7 +23,7 @@ pipeline {
     stages {
 	stage('WEBHOOK TEST'){
             steps {
-                sh 'HELLOOOOOOO!!!!!!!!!!'
+                sh 'echo"HELLOOOOOOO!!!!!!!!!!"'
             }
 	}
 	    
