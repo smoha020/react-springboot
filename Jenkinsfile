@@ -1,9 +1,9 @@
 pipeline {
     agent any
-    tools {
-        maven "MAVEN"
-        jdk "JDK8"
-    }
+//     tools {
+//         maven "MAVEN"
+//         jdk "JDK8"
+//     }
     
     environment {
         SNAPSHOT_REPO = 'bookworld-snapshot'
@@ -21,7 +21,7 @@ pipeline {
     }
 
     stages {
-	stage(){
+	stage('WEBHOOK TEST'){
             steps {
                 sh 'HELLOOOOOOO!!!!!!!!!!'
             }
