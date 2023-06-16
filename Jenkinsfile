@@ -73,35 +73,35 @@ pipeline {
             // }
         }
 
-        // stage("Quality Gate") {
-        //     steps {
-        //         timeout(time: 1, unit: 'HOURS') {
-        //             // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
-        //             // true = set pipeline to UNSTABLE, false = don't
-        //             waitForQualityGate abortPipeline: true
-        //         }
-        //     }
-        // }
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                    // true = set pipeline to UNSTABLE, false = don't
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
 
-        // stage("Upload War To Nexus"){
-        //     steps{
-        //         nexusArtifactUploader(
-        //           nexusVersion: 'nexus3',
-        //           protocol: 'http',
-        //           nexusUrl: "${NEXUS_IP}:${NEXUS_PORT}",
-        //           groupId: 'bookworld',
-        //           version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
-        //           repository: "${RELEASE_REPO}",
-        //           credentialsId: "${NEXUS_LOGIN}",
-        //           artifacts: [
-        //             [artifactId: 'bookworld',
-        //              classifier: '',
-        //              file: 'target/bookworld.war',
-        //              type: 'war']
-        //           ]
-        //         )
-        //     }
-        // }
+        stage("Upload War To Nexus"){
+            steps{
+                nexusArtifactUploader(
+                  nexusVersion: 'nexus3',
+                  protocol: 'http',
+                  nexusUrl: "${NEXUS_IP}:${NEXUS_PORT}",
+                  groupId: 'bookworld',
+                  version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
+                  repository: "${RELEASE_REPO}",
+                  credentialsId: "${NEXUS_LOGIN}",
+                  artifacts: [
+                    [artifactId: 'bookworld',
+                     classifier: '',
+                     file: 'target/bookworld.war',
+                     type: 'war']
+                  ]
+                )
+            }
+        }
 
 //         stage('Deploy Using Ansible Playbooks'){
 //             ansiblePlaybook(
