@@ -52,7 +52,7 @@ pipeline {
             steps {
             	withSonarQubeEnv('My SonarQube Server') { 
 			// You can override the credential to be used 
-			sh 'mvn sonar:sonar'
+			        sh 'cd api && mvn sonar:sonar'
             	}
 	        }
             // environment {
