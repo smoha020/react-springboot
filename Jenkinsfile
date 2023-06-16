@@ -96,7 +96,7 @@ pipeline {
                   artifacts: [
                     [artifactId: 'bookworld',
                      classifier: '',
-                     file: 'target/bookworld.war',
+                     file: 'api/target/bookworld.war',
                      type: 'war']
                   ]
                 )
