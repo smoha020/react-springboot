@@ -50,7 +50,7 @@ pipeline {
 
         stage('Sonar Analysis') {
             steps {
-            	withSonarQubeEnv('My SonarQube Server') { 
+            	withSonarQubeEnv("${SONARSERVER}") { 
 			// You can override the credential to be used 
 			        sh 'cd api && mvn clean package sonar:sonar'
             	}
