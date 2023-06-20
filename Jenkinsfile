@@ -39,13 +39,6 @@ pipeline {
                 sh 'cd api && mvn -s settings.xml test'
             }
         }
-
-//         stage('Checkstyle Analysis'){
-//             steps {
-//                 sh 'cd api && mvn -s settings.xml checkstyle:checkstyle'
-//             }
-//         }
-
  
 
         stage('Sonar Analysis') {
@@ -55,22 +48,6 @@ pipeline {
 			        sh 'cd api && mvn clean package sonar:sonar'
             	}
 	        }
-            // environment {
-            //     scannerHome = tool "${SONARSCANNER}"
-            // }
-            // steps {
-		  
-            //    withSonarQubeEnv("${SONARSERVER}") {
-            //        sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=vprofile \
-            //        -Dsonar.projectName=vprofile \
-            //        -Dsonar.projectVersion=1.0 \
-            //        -Dsonar.sources=src/ \
-            //        -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
-            //        -Dsonar.junit.reportsPath=target/surefire-reports/ \
-            //        -Dsonar.jacoco.reportsPath=target/jacoco.exec \
-            //        -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
-            //   }
-            // }
         }
 
         stage("Quality Gate") {
@@ -103,24 +80,24 @@ pipeline {
             }
         }
 
-//         stage('Deploy Using Ansible Playbooks'){
-//             ansiblePlaybook(
-//                 inventory: 'ansible/inventory',
-//                 playbook: 'ansible/import.yml',
-//                 disableHostKeyChecking: true,
-// 		credentialsId: "${ANSIBLE_LOGIN},
-//                 extraVars: [
-// 	    	    nexususername: "${NEXUS_USERNAME}",
-// 		    nexuspassword: "${NEXUS_PASSWORD}",
-// 		    nexusip: "${NEXUS_IP},
-// 		    releaserepo: "${RELEASE_REPO}",
-//                     groupid: 'bookworld',
-//                     buildtime: "${env.BUILD_TIMESTAMP}",
-//                     buildid: "${env.BUILD_ID}",
-//                     artifact: 'bookworld',
-//                     bookworld_version: "bookworld-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.war"
-//                 ]
-// 	    )
-//         }
+        stage('Deploy Using Ansible Playbooks'){
+            ansiblePlaybook(
+                inventory: 'ansible/inventory',
+                playbook: 'ansible/import.yml',
+                disableHostKeyChecking: true,
+		        credentialsId: "${ANSIBLE_LOGIN}",
+                extraVars: [
+                    nexususername: "${NEXUS_USERNAME}",
+                    nexuspassword: "${NEXUS_PASSWORD}",
+                    nexusip: "${NEXUS_IP}",
+                    releaserepo: "${RELEASE_REPO}",
+                    groupid: 'bookworld',
+                    buildtime: "${env.BUILD_TIMESTAMP}",
+                    buildid: "${env.BUILD_ID}",
+                    artifact: 'bookworld',
+                    bookworld_version: "bookworld-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.war"
+                ]
+	        )
+        }
     }
 }
