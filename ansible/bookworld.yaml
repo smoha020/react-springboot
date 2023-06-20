@@ -7,7 +7,7 @@
     - name: Download latest war from nexus
       get_url:
         url: "http://{{nexususername}}:{{nexuspassword}}@{{nexusip}}:8081/repository/{{releaserepo}}/{{groupid}}/{{buildtime}}/{{buildid}}/{{bookworld_version}}"
-        dest: "/tmp/vproapp-{{bookworld_version}}"
+        dest: "/tmp/bookworld-{{bookworld_version}}"
       register: wardeploy
       tags:
        - deploy
@@ -56,7 +56,7 @@
         block:
          - name: Deploy the artifact
            copy:
-             src: "/tmp/vproapp-{{bookworld_version}}"
+             src: "/tmp/bookworld-{{bookworld_version}}"
              dest: /usr/local/tomcat8/webapps/ROOT.war
              remote_src: yes
            register: deploy_info
