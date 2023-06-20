@@ -4,10 +4,10 @@
   vars:
     timestamp: "{{ansible_date_time.date}}_{{ansible_date_time.time}}"
   tasks:
-    - name: Download latest VProfile.war from nexus
+    - name: Download latest war from nexus
       get_url:
         url: "http://{{nexususername}}:{{nexuspassword}}@{{nexusip}}:8081/repository/{{releaserepo}}/{{groupid}}/{{buildtime}}/{{buildid}}/{{bookworld_version}}"
-        dest: "/tmp/vproapp-{{vprofile_version}}"
+        dest: "/tmp/vproapp-{{bookworld_version}}"
       register: wardeploy
       tags:
        - deploy
@@ -54,9 +54,9 @@
 
       - name: Try deploy artifact else restore from previos old_ROOT
         block:
-         - name: Deploy vprofile artifact
+         - name: Deploy the artifact
            copy:
-             src: "/tmp/vproapp-{{vprofile_version}}"
+             src: "/tmp/vproapp-{{bookworld_version}}"
              dest: /usr/local/tomcat8/webapps/ROOT.war
              remote_src: yes
            register: deploy_info
