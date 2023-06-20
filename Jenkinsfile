@@ -84,7 +84,7 @@ pipeline {
             steps{
                 ansiblePlaybook(
                 inventory: 'ansible/inventory',
-                playbook: 'ansible/import.yml',
+                playbook: 'ansible/import.yaml',
                 disableHostKeyChecking: true,
 		        credentialsId: "${ANSIBLE_LOGIN}",
                 extraVars: [
