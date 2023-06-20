@@ -81,7 +81,8 @@ pipeline {
         }
 
         stage('Deploy Using Ansible Playbooks'){
-            ansiblePlaybook(
+            steps{
+                ansiblePlaybook(
                 inventory: 'ansible/inventory',
                 playbook: 'ansible/import.yml',
                 disableHostKeyChecking: true,
@@ -96,8 +97,8 @@ pipeline {
                     buildid: "${env.BUILD_ID}",
                     artifact: 'bookworld',
                     bookworld_version: "bookworld-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.war"
-                ]
-	        )
+                ])
+            }
         }
     }
 }
