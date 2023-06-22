@@ -8,6 +8,7 @@
       get_url:
         url: "http://{{nexusip}}:8081/"
         dest: /tmp/
+        timeout: 30
 
 
     # - name: Download latest war from nexus
