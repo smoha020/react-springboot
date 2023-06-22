@@ -71,7 +71,7 @@ pipeline {
                   repository: "${RELEASE_REPO}",
                   credentialsId: "${NEXUS_LOGIN}",
                   artifacts: [
-                    [artifactId: 'bookworld',
+                    [artifactId: 'bookworld_artifact_id',
                      classifier: '',
                      file: 'api/target/bookworld.war',
                      type: 'war']
@@ -95,7 +95,7 @@ pipeline {
         //             groupid: 'bookworld',
         //             buildtime: "${env.BUILD_TIMESTAMP}",
         //             buildid: "${env.BUILD_ID}",
-        //             artifact: 'bookworld',
+        //             artifact: 'bookworld_artifact_id',
         //             bookworld_version: "bookworld-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.war"
         //         ])
         //     }
