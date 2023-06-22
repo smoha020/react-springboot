@@ -2,12 +2,14 @@
   hosts: bookworld
   become: yes
   vars:
-    timestamp: "{{ansible_date_time.date}}_{{ansible_date_time.time}}"
+    backup_timestamp: "{{ansible_date_time.date}}_{{ansible_date_time.time}}"
   tasks:
     - name: Download latest war from nexus
       get_url:
-        url: "http://{{nexususername}}:{{nexuspassword}}@{{nexusip}}:8081/repository/{{releaserepo}}/{{groupid}}/{{buildtime}}/{{buildid}}/{{bookworld_version}}"
-        dest: "/tmp/bookworld-{{bookworld_version}}"
+        url: "http://{{nexusip}}:8081/repository/{{repository}}/{{groupId}}/{{artifactId}}/{{version}}/{{artifactId}}-{{version}}.war"
+        dest: "/tmp/bookworld-{{version}}"
+        username: "{{nexususername}}"
+        password: "{{nexuspassword}}"
       register: wardeploy
       tags:
        - deploy
@@ -30,7 +32,7 @@
       - name: Archive ROOT dir with timestamp
         archive:
           path: /usr/local/tomcat8/webapps/ROOT
-          dest: "/opt/ROOT_{{timestamp}}.tgz"
+          dest: "/opt/ROOT_{{backup_timestamp}}.tgz"
         when: artifact_stat.stat.exists
         register: archive_info
         tags:
@@ -56,7 +58,7 @@
         block:
          - name: Deploy the artifact
            copy:
-             src: "/tmp/bookworld-{{bookworld_version}}"
+             src: "/tmp/bookworld-{{version}}"
              dest: /usr/local/tomcat8/webapps/ROOT.war
              remote_src: yes
            register: deploy_info

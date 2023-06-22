@@ -80,25 +80,26 @@ pipeline {
             }
         }
 
-        // stage('Deploy Using Ansible Playbooks'){
-        //     steps{
-        //         ansiblePlaybook(
-        //         inventory: 'ansible/inventory',
-        //         playbook: 'ansible/import.yaml',
-        //         disableHostKeyChecking: true,
-		//         credentialsId: "${ANSIBLE_LOGIN}",
-        //         extraVars: [
-        //             nexususername: "${NEXUS_USERNAME}",
-        //             nexuspassword: "${NEXUS_PASSWORD}",
-        //             nexusip: "${NEXUS_IP}",
-        //             releaserepo: "${RELEASE_REPO}",
-        //             groupid: 'bookworld',
-        //             buildtime: "${env.BUILD_TIMESTAMP}",
-        //             buildid: "${env.BUILD_ID}",
-        //             artifact: 'bookworld_artifact_id',
-        //             bookworld_version: "bookworld-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.war"
-        //         ])
-        //     }
-        // }
+        stage('Deploy Using Ansible Playbooks'){
+            steps{
+                ansiblePlaybook(
+                inventory: 'ansible/inventory',
+                playbook: 'ansible/import.yaml',
+                disableHostKeyChecking: true,
+		        credentialsId: "${ANSIBLE_LOGIN}",
+                extraVars: [
+                    nexususername: "${NEXUS_USERNAME}",
+                    nexuspassword: "${NEXUS_PASSWORD}",
+                    nexusip: "${NEXUS_IP}",
+                    repository: "${RELEASE_REPO}",
+                    groupId: 'bookworld',
+                    //buildtime: "${env.BUILD_TIMESTAMP}",
+                    //buildID: "${env.BUILD_ID}",
+                    artifactId: 'bookworld_artifact_id',
+                    version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
+                    //bookworld_version: "bookworld-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.war"
+                ])
+            }
+        }
     }
 }
