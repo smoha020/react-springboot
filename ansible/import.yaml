@@ -1,3 +1,3 @@
 - name: Run both playbooks
-  import_playbook: tomcat.yaml
-  import_playbook: bookworld.yaml
+#- import_playbook: tomcat.yaml
+- import_playbook: bookworld.yaml
