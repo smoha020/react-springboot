@@ -27,7 +27,7 @@
         name: tomcat
         group: tomcat
         shell: /bin/nologin
-        home: /usr/local/tomcat8
+        #home: /usr/local/tomcat8
 
     - file:
         path: /tmp/tomcat8
@@ -67,7 +67,7 @@
       systemd:
         daemon_reload: yes 
 
-    - name: Start & Enable TOmcat 8
+    - name: Start & Enable Tomcat 8
       service:
         name: tomcat
         state: started
