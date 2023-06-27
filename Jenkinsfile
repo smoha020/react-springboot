@@ -17,7 +17,7 @@ pipeline {
         NEXUS_LOGIN = 'nexus' 
         ANSIBLE_LOGIN = 'ansible-login'
         SONARSERVER = 'sonarserver'
-        SONARSCANNER = 'sonarqube-scanner'
+        //SONARSCANNER = 'sonarqube-scanner'
     }
 
     stages {
@@ -93,11 +93,8 @@ pipeline {
                     nexusip: "${NEXUS_IP}",
                     repository: "${RELEASE_REPO}",
                     groupId: 'bookworld',
-                    //buildtime: "${env.BUILD_TIMESTAMP}",
-                    //buildID: "${env.BUILD_ID}",
                     artifactId: 'bookworld_artifact_id',
-                    version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
-                    //bookworld_version: "bookworld-${env.BUILD_ID}-${env.BUILD_TIMESTAMP}.war"
+                    version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}"
                 ])
             }
         }
