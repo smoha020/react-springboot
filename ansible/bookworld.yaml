@@ -11,21 +11,16 @@
         username: "{{nexususername}}"
         password: "{{nexuspassword}}"
       register: wardeploy
-      # tags:
-      #  - deploy
 
     - stat:
         path: /usr/local/tomcat8/webapps/ROOT
       register: latest_artifact
-      # tags:
-      #  - deploy
 
     - name: Stop tomcat svc
       service:
         name: tomcat
         state: stopped
-      # tags:
-      #  - deploy
+
 
     - name: Create Backup and Deploy
       block:
@@ -35,8 +30,7 @@
           dest: "/opt/ROOT_{{backup_timestamp}}.tgz"
         when: latest_artifact.stat.exists
         register: archive_info
-        # tags:
-        #  - deploy
+
 
       - name: copy ROOT dir with old_ROOT name
         shell: cp -r ROOT old_ROOT
@@ -51,8 +45,6 @@
         loop:
          - /usr/local/tomcat8/webapps/ROOT
          - /usr/local/tomcat8/webapps/ROOT.war
-        # tags:
-        #  - deploy
 
       - name: Try deploy artifact else restore from previos old_ROOT
         block:
@@ -62,8 +54,6 @@
              dest: /usr/local/tomcat8/webapps/ROOT.war
              remote_src: yes
            register: deploy_info
-          #  tags:
-          #   - deploy
         rescue:
           - shell: cp -r old_ROOT ROOT
             args:
@@ -80,24 +70,10 @@
         name: tomcat
         state: started
       when: deploy_info.changed
-      # tags:
-      #  - deploy
 
     - name: Wait until ROOT.war is extracted to ROOT directory
       wait_for:
         path: /usr/local/tomcat8/webapps/ROOT
-      # tags:
-      #  - deploy
-
-#    - name: Deploy web configuration file
-#      template:
-#        src: templates/application.j2
-#        dest: /usr/local/tomcat8/webapps/ROOT/WEB-INF/classes/application.properties
-#        force: yes
-#      notify:
-#       - Restart Tomcat
-#      tags:
-#       - deploy
 
   handlers:
    - name: Restart Tomcat
