@@ -16,7 +16,7 @@ pipeline {
         NEXUS_PORT = '8081'
         NEXUS_LOGIN = 'nexus' 
         ANSIBLE_LOGIN = 'ansible-login'
-        SONARSERVER = 'sonarserver'
+        SONARSERVER = 'sonarqube'
         //SONARSCANNER = 'sonarqube-scanner'
     }
 
