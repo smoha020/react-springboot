@@ -19,7 +19,7 @@ pipeline {
         SONARSERVER = 'sonarqube'
         //SONARSCANNER = 'sonarqube-scanner'
     }
-
+ 
     stages {
 	    
         stage('Build'){
