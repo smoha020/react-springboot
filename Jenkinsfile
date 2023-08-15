@@ -17,7 +17,7 @@ pipeline {
         NEXUS_LOGIN = 'nexus' 
         ANSIBLE_LOGIN = 'ansible-login'
         SONARSERVER = 'sonarqube'
-        //SONARSCANNER = 'sonarqube-scanner'
+        //SONARSCANNER = 'sonarqube-scanner' 
     }
  
     stages {
