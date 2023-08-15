@@ -12,7 +12,8 @@ rm -rf /tmp/nexus/nexus.tar.gz
 rsync -avzh /tmp/nexus/ /opt/nexus/
 useradd nexus
 chown -R nexus.nexus /opt/nexus 
-cat <<EOT>> /etc/systemd/system/nexus.service
+
+cat <<EOT> /etc/systemd/system/nexus.service
 [Unit]                                                                          
 Description=nexus service                                                       
 After=network.target                                                            
@@ -28,6 +29,7 @@ Restart=on-abort
 [Install]                                                                       
 WantedBy=multi-user.target                                                      
 EOT
+
 echo 'run_as_user="nexus"' > /opt/nexus/$NEXUSDIR/bin/nexus.rc
 systemctl daemon-reload
 systemctl start nexus
