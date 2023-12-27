@@ -1,8 +1,8 @@
 name: CICD test
 on:
-  push:
-    branches: [cicd-test]
-  # workflow_dispatch:
+  # push:
+  #   branches: [cicd-test]
+  workflow_dispatch:
 
 jobs:
   Build_Publish:
